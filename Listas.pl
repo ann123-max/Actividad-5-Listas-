@@ -1,5 +1,9 @@
 %HECHOS:
 
+% Definición de género usando listas
+hombres([abraham, homero, herbert, bart, clancy]).
+mujeres([mona, marge, patty, selma, lisa, maggie, jacqueline, ling]).
+
 %Padres:
 
 padre_de(abraham, [homero, herbert]).
