@@ -18,7 +18,7 @@ madre_de(jacqueline, [marge, patty, selma]).
 
 madre_de(selma, [ling]).
 
-&REGLAS
+%REGLAS
 
 % Reglas para determinar género
 es_hombre(Persona) :- hombres(Hombres), member(Persona, Hombres).
