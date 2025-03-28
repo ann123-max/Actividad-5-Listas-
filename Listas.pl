@@ -1,6 +1,6 @@
 %HECHOS:
 
-% Definición de género usando listas
+% Definición de género 
 hombres([abraham, homero, herbert, bart, clancy]).
 mujeres([mona, marge, patty, selma, lisa, maggie, jacqueline, ling]).
 
@@ -23,3 +23,7 @@ madre_de(selma, [ling]).
 % Reglas para determinar género
 es_hombre(Persona) :- hombres(Hombres), member(Persona, Hombres).
 es_mujer(Persona) :- mujeres(Mujeres), member(Persona, Mujeres).
+
+% Regla para verificar si alguien es hijo de una persona
+es_hijo_de(Hijo, Padre) :- padre_de(Padre, Hijos), member(Hijo, Hijos).
+es_hijo_de(Hijo, Madre) :- madre_de(Madre, Hijos), member(Hijo, Hijos).
