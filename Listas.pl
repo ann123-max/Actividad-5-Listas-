@@ -30,9 +30,9 @@ es_hijo_de(Hijo, Madre) :- madre_de(Madre, Hijos), member(Hijo, Hijos).
 
 %Reglas para verificar si una persona es primo de otra
 primo_de(Primo1,Primo2) :- es_hombre(Primo1), es_hijo_de(Primo1,X),es_hijo_de(Primo2,Y),
-    es_hijo_de(Y,Z),es_hijo_de(X,Z),Y\=Z.
+    es_hijo_de(Y,Z),es_hijo_de(X,Z),Y\=Z,Primo1\=Primo2.
 prima_de(Primo1,Primo2) :- es_mujer(Primo1), es_hijo_de(Primo1,X),es_hijo_de(Primo2,Y),
-    es_hijo_de(Y,Z),es_hijo_de(X,Z),Y\=Z.
+    es_hijo_de(Y,Z),es_hijo_de(X,Z),Y\=Z,Primo1\=Primo2.
     
 %Regla para verificar los abuelos 
 abuelo_de(X,Y) :- padre_de(X,C), member(L, C), ((padre_de(L,Z), member(Y,Z));(madre_de(L,T), member(Y,T))), !.
@@ -42,3 +42,16 @@ abuela_de(X,Y) :- madre_de(X,C), member(L, C), ((madre_de(L,Z), member(Y,Z));(pa
 hermano_de(X,Y) :- es_hombre(X), padre_de(_,L), member(X,L), member(Y, L), X \= Y, !.
 hermana_de(X,Y) :- es_mujer(X), padre_de(_,L), member(X,L), member(Y,L), X \= Y, !.
 
+
+% Regla para determinar si alguien es tío de otra persona
+
+tio_de(Tio, Sobrino) :-
+    es_hombre(Tio),
+    es_hijo_de(Sobrino, PadreMadre),
+    hermano_de(Tio, PadreMadre).
+
+% Regla para determinar si alguien es tía de otra persona
+tia_de(Tia, Sobrino) :-
+    es_mujer(Tia),
+    es_hijo_de(Sobrino, PadreMadre),
+    hermano_de(Tia, PadreMadre).
