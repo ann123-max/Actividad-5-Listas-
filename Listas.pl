@@ -33,4 +33,12 @@ primo_de(Primo1,Primo2) :- es_hombre(Primo1), es_hijo_de(Primo1,X),es_hijo_de(Pr
     es_hijo_de(Y,Z),es_hijo_de(X,Z),Y\=Z.
 prima_de(Primo1,Primo2) :- es_mujer(Primo1), es_hijo_de(Primo1,X),es_hijo_de(Primo2,Y),
     es_hijo_de(Y,Z),es_hijo_de(X,Z),Y\=Z.
+    
+%Regla para verificar los abuelos 
+abuelo_de(X,Y) :- padre_de(X,C), member(L, C), ((padre_de(L,Z), member(Y,Z));(madre_de(L,T), member(Y,T))), !.
+abuela_de(X,Y) :- madre_de(X,C), member(L, C), ((madre_de(L,Z), member(Y,Z));(padre_de(L, T), member(Y,T))), !.
+
+%Regla para verificar los hermanos 
+hermano_de(X,Y) :- es_hombre(X), padre_de(_,L), member(X,L), member(Y, L), X \= Y, !.
+hermana_de(X,Y) :- es_mujer(X), padre_de(_,L), member(X,L), member(Y,L), X \= Y, !.
 
